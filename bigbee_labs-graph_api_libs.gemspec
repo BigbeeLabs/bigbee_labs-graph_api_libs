@@ -27,6 +27,8 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+=begin
+=end  
   spec.add_dependency 'bigbee_labs-remote_models_base',   '~> 0.0.4'
   spec.add_dependency 'bigbee_labs-associations',         '~> 0.0.1'
 
