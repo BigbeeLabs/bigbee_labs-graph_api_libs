@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
 
 =begin
 =end  
-  spec.add_dependency 'bigbee_labs-remote_models_base',   '~> 0.0.5'
+#  spec.add_dependency 'bigbee_labs-remote_models_base',   '~> 0.0.5'
   spec.add_dependency 'bigbee_labs-associations',         '~> 0.0.1'
 
   spec.add_development_dependency "bundler",  "~> 1.10"

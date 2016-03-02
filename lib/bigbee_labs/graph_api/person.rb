@@ -7,6 +7,7 @@ module BigbeeLabs
 #      extend BigbeeLabs::GraphApi::ActsAs::Administrating::ClassMethods
 #      extend BigbeeLabs::GraphApi::ActsAs::Administrating::MethodBuilders
       extend ActsAsRelatingTo
+      extend ActsAsHaving
 
       REMOTE_ATTRIBUTES   = [:id, :first_name, :last_name, :date_of_birth, :created_at, :updated_at, :sex_id, :ethnicity_id]
       REMOTE_REQUIRES     = [:first_name, :last_name]
@@ -14,6 +15,7 @@ module BigbeeLabs
 
       #acts_as_administrating
       acts_as_administrating :organizations, class_name: "BigbeeGraph::Organization", remote: true
+      acts_as_having :health_state, class_name: "BigbeeGraph::HealthState", remote: true
 
       class << self
         def find(id)
