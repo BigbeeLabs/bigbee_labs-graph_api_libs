@@ -7,7 +7,7 @@ module BigbeeLabs
 #      extend BigbeeLabs::GraphApi::ActsAs::Administrating::ClassMethods
 #      extend BigbeeLabs::GraphApi::ActsAs::Administrating::MethodBuilders
       extend ActsAsRelatingTo
-      extend ActsAsHaving
+      #extend ActsAsHaving
 
       REMOTE_ATTRIBUTES   = [:id, :first_name, :last_name, :date_of_birth, :created_at, :updated_at, :sex_id, :ethnicity_id]
       REMOTE_REQUIRES     = [:first_name, :last_name]
@@ -15,7 +15,7 @@ module BigbeeLabs
 
       #acts_as_administrating
       acts_as_administrating :organizations, class_name: "BigbeeGraph::Organization", remote: true
-      acts_as_having :health_state, class_name: "BigbeeGraph::HealthState", remote: true
+      #acts_as_having :health_state, remote: true
 
       class << self
         def find(id)
@@ -35,6 +35,19 @@ module BigbeeLabs
         @options ||= {}
         @options[:resource_owner_id] = self.id
         super
+      end
+
+    end
+
+    module PersonModule
+      def self.included(base)
+        base.const_set("REMOTE_ATTRIBUTES", [:id, :first_name, :last_name, :date_of_birth, :created_at, :updated_at, :sex_id, :ethnicity_id])
+        base.const_set("REMOTE_REQUIRES",   [:first_name, :last_name])
+        base.const_set("REMOTE_PERMITS",    [:id, :first_name, :last_name, :date_of_birth, :sex_id, :ethnicity_id])
+      end
+
+      def resource_owner_id
+        self.id
       end
 
     end
