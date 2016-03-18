@@ -15,6 +15,7 @@ module BigbeeLabs
         base.const_set("REMOTE_REQUIRES",   [:full_name, :description, :code])
         base.const_set("REMOTE_PERMITS",    [:id, :short_name, :full_name, :ein, :description, :code, :slug])
         base.extend ActsAsRelatingTo
+        base.extend BigbeeLabs::Associations
       end
 
     end

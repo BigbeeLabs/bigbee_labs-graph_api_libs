@@ -2,6 +2,7 @@
 
 module BigbeeLabs
   module GraphApi
+=begin    
     class Person < Base
       extend BigbeeLabs::GraphApi::ActsAs::Administrating
 #      extend BigbeeLabs::GraphApi::ActsAs::Administrating::ClassMethods
@@ -38,6 +39,7 @@ module BigbeeLabs
       end
 
     end
+=end
 
     module PersonModule
       def self.included(base)
@@ -46,8 +48,8 @@ module BigbeeLabs
         base.const_set("REMOTE_PERMITS",    [:id, :first_name, :last_name, :date_of_birth, :sex_id, :ethnicity_id])
         base.extend ActsAsAdministering
         base.extend ActsAsRelatingTo
-        base.acts_as_having :enrolled_programs, remote: true, class_name: "BigbeeGraph::Program"
-        base.acts_as_having :state_machines, class_name: "FiniteStateMachine::Machine"
+        base.include InstanceMethods
+        #base.acts_as_having :enrolled_programs, remote: true, class_name: "BigbeeGraph::Program"
         base.acts_as_having :program_roles, remote: true
         base.acts_as_administrating :programs, class_name: "BigbeeGraph::Program", remote: true
         #acts_as_relating_to :api_services

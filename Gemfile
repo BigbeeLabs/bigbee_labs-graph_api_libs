@@ -5,7 +5,7 @@ end
 gemspec
 
 gem 'bigbee_labs-remote_models_base',       path: '~/rails_projects/gems_and_engines/bigbee_labs-remote_models_base'
+gem 'bigbee_labs-associations',             path: '~/rails_projects/gems_and_engines/bigbee_labs-associations'
 =begin
 gem 'app_collaborators',                    path: '~/rails_projects/bigbee/app_collaborators'
-gem 'bigbee_labs-associations',             path: '~/rails_projects/gems_and_engines/bigbee_labs-associations'
 =end
