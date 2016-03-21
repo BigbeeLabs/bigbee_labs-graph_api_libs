@@ -56,7 +56,7 @@ module BigbeeLabs
         base.acts_as_administrating :organizations, class_name: "BigbeeGraph::Organization", remote: true
         base.acts_as_administrating :applications, class_name: "BigbeeAccounts::AppClient", remote: true
         base.acts_as_having :health_state, remote: true
-        base.acts_as_having :personal_information, remote: true
+        #base.acts_as_having :personal_information, remote: true
         
         base.define_singleton_method(:find) do |id|
           my_klass.resource_owner_id = id

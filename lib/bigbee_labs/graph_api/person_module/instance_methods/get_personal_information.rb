@@ -4,12 +4,13 @@ module BigbeeLabs
       module InstanceMethods
         module GetPersonalInformation
 
-          def get_personal_information_url
-            my_klass.url = "#{self.class::APP_PROVIDER.url}/people/#{self.id}/get_personal_information"
+          def personal_information_url
+            my_klass.url = "#{self.class::APP_PROVIDER.url}/people/#{self.id}/personal_information"
             my_klass.append_query("information")
+            puts "in #{self.class}.#{__method__}, my_klass.url: #{my_klass.url}"
           end
 
-          def get_personal_information(requested_information)
+          def personal_information(requested_information)
             my_klass.called_by = __method__.to_s
             my_klass.query = requested_information
             result = generic('get')
