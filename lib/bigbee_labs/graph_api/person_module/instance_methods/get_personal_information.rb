@@ -7,7 +7,6 @@ module BigbeeLabs
           def personal_information_url
             my_klass.url = "#{self.class::APP_PROVIDER.url}/people/#{self.id}/personal_information"
             my_klass.append_query("information")
-            puts "in #{self.class}.#{__method__}, my_klass.url: #{my_klass.url}"
           end
 
           def personal_information(requested_information)

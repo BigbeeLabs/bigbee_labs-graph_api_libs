@@ -1,7 +1,9 @@
 module BigbeeLabs
   module GraphApi
-    class HealthState < Base
-      
+    module HealthState
+      module Base
+        
+      end
     end
   end
 end

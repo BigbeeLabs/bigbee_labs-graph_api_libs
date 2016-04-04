@@ -1,6 +1,6 @@
 module BigbeeLabs
   module GraphApi
-
+=begin
     class Organization < Base
 
       REMOTE_ATTRIBUTES   = [:id, :short_name, :full_name, :ein, :description, :code, :created_at, :updated_at, :slug, :resource_owner_id, :errors]
@@ -8,9 +8,13 @@ module BigbeeLabs
       REMOTE_PERMITS      = [:id, :short_name, :full_name, :ein, :description, :code, :slug]
 
     end
-
-    module OrganizationModule
+=end
+    module Organization
       def self.included(base)
+        @remote_attributes  = [:id, :short_name, :full_name, :ein, :description, :code, :created_at, :updated_at, :slug, :resource_owner_id, :errors]
+        @remote_requires    = [:full_name, :description, :code]
+        @remote_permits     = [:id, :short_name, :full_name, :ein, :description, :code, :slug]
+        
         base.const_set("REMOTE_ATTRIBUTES", [:id, :short_name, :full_name, :ein, :description, :code, :created_at, :updated_at, :slug, :resource_owner_id, :errors])
         base.const_set("REMOTE_REQUIRES",   [:full_name, :description, :code])
         base.const_set("REMOTE_PERMITS",    [:id, :short_name, :full_name, :ein, :description, :code, :slug])

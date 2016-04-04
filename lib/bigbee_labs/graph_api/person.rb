@@ -2,73 +2,56 @@
 
 module BigbeeLabs
   module GraphApi
-=begin    
-    class Person < Base
-      extend BigbeeLabs::GraphApi::ActsAs::Administrating
-#      extend BigbeeLabs::GraphApi::ActsAs::Administrating::ClassMethods
-#      extend BigbeeLabs::GraphApi::ActsAs::Administrating::MethodBuilders
-      extend ActsAsRelatingTo
-      #extend ActsAsHaving
-
-      REMOTE_ATTRIBUTES   = [:id, :first_name, :last_name, :date_of_birth, :created_at, :updated_at, :sex_id, :ethnicity_id]
-      REMOTE_REQUIRES     = [:first_name, :last_name]
-      REMOTE_PERMITS      = [:id, :first_name, :last_name, :date_of_birth, :sex_id, :ethnicity_id]
-
-      #acts_as_administrating
-      acts_as_administrating :organizations, class_name: "BigbeeGraph::Organization", remote: true
-      #acts_as_having :health_state, remote: true
-
-      class << self
-        def find(id)
-          puts "in #{self}.#{__method__}, id: #{id}"
-          my_klass.resource_owner_id = id
-          super
-        end
-      end
-
-      def resource_owner_id
-        ret = my_klass.resource_owner_id
-        ret ||= self.id
-        ret
-      end
-
-      def delete
-        @options ||= {}
-        @options[:resource_owner_id] = self.id
-        super
-      end
-
-    end
-=end
 
     module PersonModule
       def self.included(base)
-        base.const_set("REMOTE_ATTRIBUTES", [:id, :first_name, :last_name, :date_of_birth, :created_at, :updated_at, :sex_id, :ethnicity_id])
-        base.const_set("REMOTE_REQUIRES",   [:first_name, :last_name])
-        base.const_set("REMOTE_PERMITS",    [:id, :first_name, :last_name, :date_of_birth, :sex_id, :ethnicity_id])
-        base.extend ActsAsAdministering
-        base.extend ActsAsRelatingTo
-        base.include InstanceMethods
-        #base.acts_as_having :enrolled_programs, remote: true, class_name: "BigbeeGraph::Program"
-        base.acts_as_having :program_roles, remote: true
-        base.acts_as_administrating :programs, class_name: "BigbeeGraph::Program", remote: true
-        #acts_as_relating_to :api_services
-        base.acts_as_administrating :organizations, class_name: "BigbeeGraph::Organization", remote: true
-        base.acts_as_administrating :applications, class_name: "BigbeeAccounts::AppClient", remote: true
-        base.acts_as_having :health_state, remote: true
-        #base.acts_as_having :personal_information, remote: true
-        
-        base.define_singleton_method(:find) do |id|
-          my_klass.resource_owner_id = id
-          super id
-        end
+        base.class_eval do 
+          
+          const_set("REMOTE_ATTRIBUTES", [:id, :first_name, :last_name, :date_of_birth, :created_at, :updated_at, :sex_id, :ethnicity_id])
+          const_set("REMOTE_REQUIRES",   [:first_name, :last_name])
+          const_set("REMOTE_PERMITS",    [:id, :first_name, :last_name, :date_of_birth, :sex_id, :ethnicity_id])
+          
+          extend  ActsAsAdministering
+          extend  ActsAsRelatingTo
+          extend  ActsAsHaving
+          include InstanceMethods
+          
+          acts_as_administrating :applications,   class_name: "BigbeeAccounts::AppClient",  remote: true
+          acts_as_administrating :organizations,  class_name: "BigbeeGraph::Organization",  remote: true
+          acts_as_administrating :programs,       class_name: "BigbeeGraph::Program",       remote: true
+          #acts_as_having         :health_state,   remote: true
+          acts_as_having         :program_roles,  remote: true
+          #acts_as_having         :permissioned_applications, class_name: 'AppCollaborators::AppClient', remote: true
+
+          
+          define_singleton_method(:find) do |id|
+            my_klass.resource_owner_id = id
+            super id
+          end
+
+        end        
       end
 
       def resource_owner_id
         self.id
       end
 
+    end
+
+    module Person
+
+      def self.included(base)
+        base.class_eval do 
+          include BigbeeLabs::GraphApi::Base
+          include BigbeeLabs::GraphApi::PersonModule
+
+          @remote_attributes  = [:id, :first_name, :last_name, :date_of_birth, :created_at, :updated_at, :sex_id, :ethnicity_id]
+          @remote_permits     = [:id, :first_name, :last_name, :date_of_birth, :sex_id, :ethnicity_id]
+          @remote_requires    = [:first_name, :last_name]
+        end
+      end
 
     end
+
   end
 end
