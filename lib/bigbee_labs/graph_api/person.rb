@@ -20,7 +20,7 @@ module BigbeeLabs
           acts_as_administrating :organizations,  class_name: "BigbeeGraph::Organization",  remote: true
           acts_as_administrating :programs,       class_name: "BigbeeGraph::Program",       remote: true
           #acts_as_having         :health_state,   remote: true
-          acts_as_having         :program_roles,  remote: true
+          #acts_as_having         :program_roles,  remote: true
           #acts_as_having         :permissioned_applications, class_name: 'AppCollaborators::AppClient', remote: true
 
           
@@ -45,9 +45,9 @@ module BigbeeLabs
           include BigbeeLabs::GraphApi::Base
           include BigbeeLabs::GraphApi::PersonModule
 
-          @remote_attributes  = [:id, :first_name, :last_name, :date_of_birth, :created_at, :updated_at, :sex_id, :ethnicity_id]
-          @remote_permits     = [:id, :first_name, :last_name, :date_of_birth, :sex_id, :ethnicity_id]
-          @remote_requires    = [:first_name, :last_name]
+          my_klass.remote_attributes  = [:id, :first_name, :last_name, :date_of_birth, :created_at, :updated_at, :sex_id, :ethnicity_id]
+          my_klass.remote_permits     = [:id, :first_name, :last_name, :date_of_birth, :sex_id, :ethnicity_id]
+          my_klass.remote_requires    = [:first_name, :last_name]
         end
       end
 
