@@ -27,12 +27,25 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_dependency 'bigbee_labs-remote_models_base',   '~> 0.0.7'
 =begin
-=end  
-  spec.add_dependency 'bigbee_labs-remote_models_base',   '~> 0.0.6'
   spec.add_dependency 'bigbee_labs-associations',         '~> 0.0.1'
+=end  
 
   spec.add_development_dependency "bundler",  "~> 1.10"
   spec.add_development_dependency "rake",     "~> 10.0"
   spec.add_development_dependency "rspec",    "~> 3.4"
+
+  spec.add_development_dependency "rails", "~> 4.2"
+  spec.add_development_dependency 'pg',                  '~> 0.18'
+  spec.add_development_dependency 'rspec-rails',         '~> 3.4'
+  spec.add_development_dependency 'capybara',            '~> 2.5'
+  spec.add_development_dependency 'factory_girl_rails',  '~> 4.5'
+  #spec.add_development_dependency 'cucumber-rails',      '~> 1.4'
+  spec.add_development_dependency 'database_cleaner',    '~> 1.5'
+  spec.add_development_dependency 'selenium-client',     '~> 1.2'
+  spec.add_development_dependency 'selenium-webdriver',  '~> 2.48'
+  spec.add_development_dependency 'shoulda-matchers',    '~> 3.0'
+  spec.add_development_dependency 'webrat',              '~> 0.7'
+  spec.add_development_dependency 'acts-as-taggable-on', '~> 3.5'  
 end
