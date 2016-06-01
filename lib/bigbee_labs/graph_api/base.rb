@@ -12,7 +12,7 @@ module BigbeeLabs
           include BigbeeLabs::RemoteModels::Base
         end
       end
-    end # BaseModule
+    end # Base
 
   end
 end
