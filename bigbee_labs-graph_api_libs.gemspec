@@ -28,8 +28,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency 'bigbee_labs-associations',         '~> 0.0.2'
+  spec.add_dependency 'bigbee_labs-remote_models_base',   '~> 0.0.13'
 =begin
-  spec.add_dependency 'bigbee_labs-remote_models_base',   '~> 0.0.12'
 =end  
 
   spec.add_development_dependency "bundler",  "~> 1.10"
