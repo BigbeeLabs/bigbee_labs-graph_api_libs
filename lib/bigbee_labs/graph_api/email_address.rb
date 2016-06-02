@@ -12,7 +12,7 @@ module BigbeeLabs
     module EmailAddress
       def self.included(base)
         base.class_eval do  
-          my_klass.remote_attributes  = [:id, :address, :created_ad, :updated_at]
+          my_klass.remote_attributes  = [:id, :address, :created_at, :updated_at, :errors]
           my_klass.remote_requires    = [:address]
           my_klass.remote_permits     = [:address]
         end

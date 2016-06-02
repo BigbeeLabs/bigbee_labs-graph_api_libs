@@ -7,7 +7,7 @@ module BigbeeLabs
       def self.included(base)
         base.class_eval do 
           
-          const_set("REMOTE_ATTRIBUTES", [:id, :first_name, :last_name, :date_of_birth, :created_at, :updated_at, :sex_id, :ethnicity_id])
+          const_set("REMOTE_ATTRIBUTES", [:id, :first_name, :last_name, :date_of_birth, :created_at, :updated_at, :sex_id, :ethnicity_id, :errors])
           const_set("REMOTE_REQUIRES",   [:first_name, :last_name])
           const_set("REMOTE_PERMITS",    [:id, :first_name, :last_name, :date_of_birth, :sex_id, :ethnicity_id])
           
