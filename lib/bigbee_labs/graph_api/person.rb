@@ -23,7 +23,6 @@ module BigbeeLabs
           #acts_as_having         :program_roles,  remote: true
           #acts_as_having         :permissioned_applications, class_name: 'AppCollaborators::AppClient', remote: true
 
-          
           define_singleton_method(:find) do |id|
             my_klass.resource_owner_id = id
             super id
