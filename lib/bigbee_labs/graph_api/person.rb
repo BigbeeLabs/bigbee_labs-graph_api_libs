@@ -16,6 +16,9 @@ module BigbeeLabs
           extend  ActsAsHaving
           include InstanceMethods
           
+          # TODO: remove acts_as_administrating :applications? 
+          # It seems weird for it to be here because graph shouldn't know anything about 
+          # administrating applications.
           acts_as_administrating :applications,   class_name: "BigbeeAccounts::AppClient",  remote: true
           acts_as_administrating :organizations,  class_name: "BigbeeGraph::Organization",  remote: true
           acts_as_administrating :programs,       class_name: "BigbeeGraph::Program",       remote: true
