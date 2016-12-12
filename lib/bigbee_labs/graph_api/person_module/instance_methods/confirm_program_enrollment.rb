@@ -13,9 +13,7 @@ module BigbeeLabs
           def confirm_program_enrollment(args)
             my_klass.called_by = "confirm_program_enrollment"
             my_klass.query = args
-            remote_result = generic('get').tap do |var|
-              puts "in #{self.class}.#{__method__}, var: #{var}"
-            end
+            remote_result = generic('get')
           end
 
           private :confirm_program_enrollment_url
