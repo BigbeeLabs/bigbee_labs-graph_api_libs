@@ -1,5 +1,3 @@
-require_dependency 'bigbee_graph/base'
-
 class BigbeeGraph::Organization < BigbeeGraph::Base
   my_klass.remote_attributes  = [:id, :short_name, :full_name, :ein, :description, :code, :created_at, :updated_at, :slug, :resource_owner_id, :errors]
   my_klass.remote_requires    = [:full_name, :description, :code]
