@@ -296,3 +296,274 @@ ORDER BY c.conname
   [1m[35m (0.3ms)[0m  ROLLBACK
   [1m[36m (0.1ms)[0m  [1mBEGIN[0m
   [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateAppCollaboratorsAppProviders (20150627214444)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (15.3ms)[0m  [1mCREATE TABLE "app_collaborators_app_providers" ("id" serial primary key, "name" character varying, "uri" character varying, "base_path" character varying, "uuid" character varying, "secret" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150627214444"]]
+  [1m[36m (2.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateAppCollaboratorsAccessTokens (20150627222258)
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36m (9.4ms)[0m  [1mCREATE TABLE "app_collaborators_access_tokens" ("id" serial primary key, "application_id" integer, "application_type" character varying, "resource_owner_id" integer, "token" character varying, "refresh_token" character varying, "expires_in" integer, "revoked_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150627222258"]]
+  [1m[36m (1.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreateActsAsRelatingToRelationships (20150709011057)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (9.2ms)[0m  [1mCREATE TABLE "acts_as_relating_to_relationships" ("id" serial primary key, "owner_id" integer, "owner_type" character varying, "in_relation_to_id" integer, "in_relation_to_type" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150709011057"]]
+  [1m[36m (2.9ms)[0m  [1mCOMMIT[0m
+Migrating to CreateAppCollaboratorsAppClients (20150724204526)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (7.0ms)[0m  [1mCREATE TABLE "app_collaborators_app_clients" ("id" serial primary key, "name" character varying, "uuid" character varying, "secret" character varying, "redirect_uri" text, "scopes" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150724204526"]]
+  [1m[36m (1.4ms)[0m  [1mCOMMIT[0m
+Migrating to AddAppClientToAppProvider (20150803220327)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "app_collaborators_app_providers" ADD "app_client_type" character varying[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "app_collaborators_app_providers" ADD "app_client_id" integer
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20150803220327"]]
+  [1m[35m (1.3ms)[0m  COMMIT
+Migrating to CreateAppCollaboratorsScopes (20150928212054)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (7.4ms)[0m  CREATE TABLE "app_collaborators_scopes" ("id" serial primary key, "code" character varying, "display_text" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20150928212054"]]
+  [1m[35m (6.4ms)[0m  COMMIT
+Migrating to DeleteScopesFromAppCollaboratorsAppClient (20150928233201)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (1.2ms)[0m  ALTER TABLE "app_collaborators_app_clients" DROP "scopes"
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20150928233201"]]
+  [1m[35m (1.3ms)[0m  COMMIT
+Migrating to AddDisplayNameToAppCollaboratorsAppClient (20150929165123)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "app_collaborators_app_clients" ADD "display_name" character varying
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20150929165123"]]
+  [1m[35m (1.1ms)[0m  COMMIT
+Migrating to CreateAppCollaboratorsAccessGrants (20150929182923)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (7.1ms)[0m  CREATE TABLE "app_collaborators_access_grants" ("id" serial primary key, "app_client_id" integer, "code" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20150929182923"]]
+  [1m[35m (1.5ms)[0m  COMMIT
+Migrating to AddResourceOwnerIdToAppCollaboratorsAccessGrants (20150929212820)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "app_collaborators_access_grants" ADD "resource_owner_id" integer
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20150929212820"]]
+  [1m[35m (1.1ms)[0m  COMMIT
+Migrating to AddAccessTokenIdToAppCollaboratorsAccessGrant (20150929231519)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "app_collaborators_access_grants" ADD "access_token_id" integer
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20150929231519"]]
+  [1m[35m (1.0ms)[0m  COMMIT
+Migrating to AddApiKeyToAppCollaboratorsAppClient (20151007210359)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "app_collaborators_app_clients" ADD "api_key" character varying
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20151007210359"]]
+  [1m[35m (1.2ms)[0m  COMMIT
+Migrating to CreateAppCollaboratorsApiServiceTransactions (20151023185329)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (11.2ms)[0m  CREATE TABLE "app_collaborators_api_service_transactions" ("id" serial primary key, "api_service_id" integer, "app_client_id" integer, "result_status" character varying, "result" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20151023185329"]]
+  [1m[35m (1.3ms)[0m  COMMIT
+Migrating to CreateActsAsHavingHasAs (20151125170209)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (7.0ms)[0m  CREATE TABLE "acts_as_having_has_as" ("id" serial primary key, "haser_type" character varying, "haser_id" integer, "hased_type" character varying, "hased_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20151125170209"]]
+  [1m[35m (5.9ms)[0m  COMMIT
+Migrating to CreateActsAsRelatingToRoles (20161122214255)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (7.3ms)[0m  CREATE TABLE "acts_as_relating_to_roles" ("id" serial primary key, "name" character varying, "display_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20161122214255"]]
+  [1m[35m (1.4ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (3.0ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'acts_as_having_has_as'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.5ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'acts_as_relating_to_relationships'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.6ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'acts_as_relating_to_roles'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.5ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'app_collaborators_access_grants'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.5ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'app_collaborators_access_tokens'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.5ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'app_collaborators_api_service_transactions'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.4ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'app_collaborators_app_clients'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.4ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'app_collaborators_app_providers'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.5ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'app_collaborators_scopes'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (2.2ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'bigbee_labs_event_bases'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.1ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'bigbee_labs_events'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.9ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'bigbee_labs_events_event_listens'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.6ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'bigbee_labs_events_event_occurrence_bases'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (208.5ms)[0m  [1mDROP DATABASE IF EXISTS "bigbee_events_dummy_test"[0m
+  [1m[35m (246.8ms)[0m  CREATE DATABASE "bigbee_events_dummy_test" ENCODING = 'unicode'
+  [1m[36mSQL (0.5ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (16.8ms)[0m  CREATE TABLE "acts_as_having_has_as" ("id" serial primary key, "haser_type" character varying, "haser_id" integer, "hased_type" character varying, "hased_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (9.0ms)[0m  [1mCREATE TABLE "acts_as_relating_to_relationships" ("id" serial primary key, "owner_id" integer, "owner_type" character varying, "in_relation_to_id" integer, "in_relation_to_type" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (13.1ms)[0m  CREATE TABLE "acts_as_relating_to_roles" ("id" serial primary key, "name" character varying, "display_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (8.6ms)[0m  [1mCREATE TABLE "app_collaborators_access_grants" ("id" serial primary key, "app_client_id" integer, "code" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "resource_owner_id" integer, "access_token_id" integer) [0m
+  [1m[35m (9.7ms)[0m  CREATE TABLE "app_collaborators_access_tokens" ("id" serial primary key, "application_id" integer, "application_type" character varying, "resource_owner_id" integer, "token" character varying, "refresh_token" character varying, "expires_in" integer, "revoked_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (11.1ms)[0m  [1mCREATE TABLE "app_collaborators_api_service_transactions" ("id" serial primary key, "api_service_id" integer, "app_client_id" integer, "result_status" character varying, "result" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (19.4ms)[0m  CREATE TABLE "app_collaborators_app_clients" ("id" serial primary key, "name" character varying, "uuid" character varying, "secret" character varying, "redirect_uri" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "display_name" character varying, "api_key" character varying) 
+  [1m[36m (15.7ms)[0m  [1mCREATE TABLE "app_collaborators_app_providers" ("id" serial primary key, "name" character varying, "uri" character varying, "base_path" character varying, "uuid" character varying, "secret" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "app_client_type" character varying, "app_client_id" integer) [0m
+  [1m[35m (10.8ms)[0m  CREATE TABLE "app_collaborators_scopes" ("id" serial primary key, "code" character varying, "display_text" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (14.9ms)[0m  [1mCREATE TABLE "bigbee_labs_event_bases" ("id" serial primary key, "system_name" character varying, "description" text, "display" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (10.7ms)[0m  CREATE TABLE "bigbee_labs_events" ("id" serial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "details" jsonb DEFAULT '{}', "description" text, "type" character varying, "display" character varying) 
+  [1m[36m (2.7ms)[0m  [1mCREATE  INDEX  "index_bigbee_labs_events_on_details" ON "bigbee_labs_events" USING gin ("details")[0m
+  [1m[35m (10.4ms)[0m  CREATE TABLE "bigbee_labs_events_event_listens" ("id" serial primary key, "event_id" integer, "details" jsonb DEFAULT '{}', "callback" jsonb DEFAULT '{}', "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (10.8ms)[0m  [1mCREATE TABLE "bigbee_labs_events_event_occurrence_bases" ("id" serial primary key, "event_type" character varying, "event_id" character varying, "type" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "details" jsonb DEFAULT '{}' NOT NULL) [0m
+  [1m[35m (2.2ms)[0m  CREATE  INDEX  "index_bigbee_labs_events_event_occurrence_bases_on_details" ON "bigbee_labs_events_event_occurrence_bases" USING gin ("details")
+  [1m[36m (4.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (3.9ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36m (0.3ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (1.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20170112155444')
+  [1m[36m (1.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20151125170209')[0m
+  [1m[35m (1.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150929212820')
+  [1m[36m (1.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150803220327')[0m
+  [1m[35m (1.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150928233201')
+  [1m[36m (1.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150928212054')[0m
+  [1m[35m (1.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150627214444')
+  [1m[36m (1.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150929231519')[0m
+  [1m[35m (1.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150929182923')
+  [1m[36m (1.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150627222258')[0m
+  [1m[35m (1.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20151007210359')
+  [1m[36m (1.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150724204526')[0m
+  [1m[35m (1.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20151023185329')
+  [1m[36m (1.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150929165123')[0m
+  [1m[35m (1.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150709011057')
+  [1m[36m (1.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20161122214255')[0m
