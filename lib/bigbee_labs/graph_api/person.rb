@@ -2,8 +2,8 @@
 
 module BigbeeLabs
   module GraphApi
-
     module PersonModule
+=begin      
       def self.included(base)
         base.class_eval do 
           
@@ -37,15 +37,15 @@ module BigbeeLabs
       def resource_owner_id
         self.id
       end
-
+=end
     end
 
     module Person
 
       def self.included(base)
         base.class_eval do 
-          include BigbeeLabs::GraphApi::Base
-          include BigbeeLabs::GraphApi::PersonModule
+#          include BigbeeLabs::GraphApi::Base
+#          include BigbeeLabs::GraphApi::PersonModule
 
           my_klass.remote_attributes  = [:id, :first_name, :last_name, :date_of_birth, :created_at, :updated_at, :sex_id, :ethnicity_id]
           my_klass.remote_permits     = [:id, :first_name, :last_name, :date_of_birth, :sex_id, :ethnicity_id]
