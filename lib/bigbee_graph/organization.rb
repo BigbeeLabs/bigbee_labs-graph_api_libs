@@ -5,6 +5,6 @@ class BigbeeGraph::Organization < BigbeeGraph::Base
   my_klass.remote_requires    = [:full_name, :description, :code]
   my_klass.remote_permits     = [:id, :short_name, :full_name, :ein, :description, :code, :slug]
   extend ActsAsRelatingTo
-  acts_as_having :programs, class_name: 'BigbeeGraph::Program', remote: true
+  #acts_as_having :programs, class_name: 'BigbeeGraph::Program', remote: true
   
 end
