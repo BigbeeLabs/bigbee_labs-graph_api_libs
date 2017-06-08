@@ -11,6 +11,6 @@ module BigbeeGraph
   end
 end
 =end
-Dir[Gem::Specification.find_by_name("bigbee_labs-graph_api_libs").gem_dir + "/lib/bigbee_labs/graph_api/*.rb"].each do |f| 
+Dir[Gem::Specification.find_by_name("bigbee_labs-graph_api_libs").gem_dir + "/lib/bigbee_labs/graph_api/**/*.rb"].each do |f| 
   require f
 end
