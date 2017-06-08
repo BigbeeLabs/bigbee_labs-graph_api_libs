@@ -1,3 +1,5 @@
+require_dependency 'bigbee_labs/graph_api/person'
+
 module BigbeeLabs::GraphApi::Person::ActsAs
   
     def self.included(base)
