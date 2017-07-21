@@ -8,8 +8,8 @@ module BigbeeLabs::GraphApi::Person::ActsAs
         base.acts_as_having :email_addresses, class_name: "BigbeeGraph::EmailAddress", remote: true
         base.acts_as_having :phone_numbers, class_name: "BigbeeGraph::PhoneNumber", remote: true
         base.acts_as_having :physical_addresses, class_name: "BigbeeGraph::PhysicalAddress", remote: true
+        base.acts_as_relating_to :people, class_name: "BigbeeGraph::Person", remote: true
       end
     end
-
 
 end

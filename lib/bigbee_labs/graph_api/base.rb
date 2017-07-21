@@ -5,7 +5,6 @@ require_dependency 'app_collaborators'
 
 module BigbeeLabs
   module GraphApi
-
     module Base
       def self.included(base)
         base.class_eval do

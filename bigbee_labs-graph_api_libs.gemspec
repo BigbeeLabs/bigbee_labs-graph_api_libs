@@ -28,8 +28,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency 'bigbee_labs-associations',         '~> 0.0.2'
-  spec.add_dependency 'bigbee_labs-remote_models_base',   '~> 0.0.17'
 =begin
+  spec.add_dependency 'bigbee_labs-remote_models_base',   '~> 0.0.17'
 =end  
 
   spec.add_development_dependency "bundler",  "~> 1.10"
@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec",    "~> 3.4"
 
   spec.add_development_dependency "rails", "~> 4.2"
-  spec.add_development_dependency 'pg',                  '~> 0.18'
+  spec.add_development_dependency 'pg',                  '0.20.0'
   spec.add_development_dependency 'rspec-rails',         '~> 3.4'
   spec.add_development_dependency 'capybara',            '~> 2.5'
   spec.add_development_dependency 'factory_girl_rails',  '~> 4.5'
@@ -48,4 +48,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'shoulda-matchers',    '~> 3.0'
   spec.add_development_dependency 'webrat',              '~> 0.7'
   spec.add_development_dependency 'acts-as-taggable-on', '~> 3.5'  
+
 end
