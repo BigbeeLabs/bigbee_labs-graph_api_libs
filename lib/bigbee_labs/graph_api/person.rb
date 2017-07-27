@@ -25,7 +25,22 @@ module BigbeeLabs
           end
         end
 
+        def using_token
+          set_token unless (@credential and @credential[:token])
+          self
+        end
+
         private :public_profile_url
+
+        private
+
+          def set_token
+            @credential = {token: access_token.token} if access_token
+          end
+
+          def access_token
+            @access_token ||= AppCollaborators::AccessToken.find_by(resource_owner_id: self.id)
+          end
 
       end
 
