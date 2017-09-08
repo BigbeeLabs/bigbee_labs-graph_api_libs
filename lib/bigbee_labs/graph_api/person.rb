@@ -30,6 +30,10 @@ module BigbeeLabs
           self
         end
 
+        def full_name
+          "#{self.first_name} #{self.last_name}"
+        end
+        
         private :public_profile_url
 
         private
