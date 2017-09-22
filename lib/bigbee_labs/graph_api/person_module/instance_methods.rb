@@ -8,9 +8,10 @@ module BigbeeLabs
   module GraphApi
     module PersonModule
       module InstanceMethods
-        include GetPersonalInformation
-        include UpdatePersonalInformation
-        include ConfirmProgramEnrollment
+        #include GetPersonalInformation
+        #include UpdatePersonalInformation
+        #include ConfirmProgramEnrollment
+        include ContactInformation
       end
     end
   end
