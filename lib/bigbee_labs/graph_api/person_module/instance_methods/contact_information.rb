@@ -17,7 +17,7 @@ module BigbeeLabs
           def contact_information
             @called_by = __method__.to_s
             generic('get').tap do |result|
-              puts "#{self.class}.#{__method__}, result:"<<" #{result}".red
+              #puts "#{self.class}.#{__method__}, result:"<<" #{result}".red
             end
           end
 
