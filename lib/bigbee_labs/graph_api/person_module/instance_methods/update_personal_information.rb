@@ -10,7 +10,6 @@ module BigbeeLabs
           end
 
           def update_personal_information(args)
-            puts "in #{self.class}.#{__method__}, args: #{args}"
             my_klass.called_by = __method__.to_s
             my_klass.query = args
             remote_result = generic("put")
