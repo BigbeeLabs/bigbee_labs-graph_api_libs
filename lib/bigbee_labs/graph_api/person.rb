@@ -8,6 +8,8 @@ module BigbeeLabs
           my_klass.remote_permits     += [:id, :first_name, :last_name, :date_of_birth, :sex_id, :ethnicity_id]
           my_klass.remote_requires    += [:first_name, :last_name]
           include BigbeeLabs::GraphApi::PersonModule::InstanceMethods
+
+          acts_as_relating_to :groups, class_name: 'BigbeeGraph::Group', remote: true
         end
 
         def public_profile_url
