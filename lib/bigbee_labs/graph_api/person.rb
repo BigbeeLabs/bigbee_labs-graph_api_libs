@@ -24,9 +24,7 @@ module BigbeeLabs
 
         def public_profile
           @called_by = __method__.to_s
-          generic('get').tap do |remote_result|
-            puts "#{self.class}.#{__method__}, remote_result:"<<" #{remote_result}".green
-          end
+          generic('get')
         end
 
         def using_token
