@@ -3,6 +3,7 @@ module BigbeeLabs
     module Person
 
       def self.included(base)
+
         base.class_eval do 
           my_klass.remote_attributes  += [:id, :first_name, :last_name, :date_of_birth, :created_at, :updated_at, :sex_id, :ethnicity_id, :errors, :search_matches]
           my_klass.remote_permits     += [:id, :first_name, :last_name, :date_of_birth, :sex_id, :ethnicity_id]
@@ -40,17 +41,17 @@ module BigbeeLabs
           "#{self.last_name}, #{self.first_name}"
         end
         
+        def set_token
+          @credential = {token: access_token.token} if access_token
+        end
+
+        def access_token
+          @access_token ||= AppCollaborators::AccessToken.find_by(resource_owner_id: self.id)
+        end
+
         private :public_profile_url
-
-        private
-
-          def set_token
-            @credential = {token: access_token.token} if access_token
-          end
-
-          def access_token
-            @access_token ||= AppCollaborators::AccessToken.find_by(resource_owner_id: self.id)
-          end
+        private :set_token
+        private :access_token
 
       end
 
